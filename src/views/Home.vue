@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <BaseForm/>
     <Tareas></Tareas>
   </div>
 </template>
