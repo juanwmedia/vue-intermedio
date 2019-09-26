@@ -14,14 +14,18 @@
 </template>
 
 <script>
+    import todoService from '../services/todoService.js';
     import Tarea from '@/components/Tarea'
     export default {
         name: 'Tareas',
         created() {
-            fetch('https://jsonplaceholder.typicode.com/todos')
-                .then(respuesta => respuesta.json())
-                    .then(datos => this.tareas = datos)
-            .catch(error => console.error(error));
+            // fetch('https://jsonplaceholder.typicode.com/todos')
+            //     .then(respuesta => respuesta.json())
+            //         .then(datos => this.tareas = datos)
+            // .catch(error => console.error(error));
+
+            todoService.get()
+                .then(tareas => this.tareas = tareas.data);
 
         },
         data() {
