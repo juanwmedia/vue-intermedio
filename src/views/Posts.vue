@@ -1,26 +1,16 @@
 <template>
   <div class="about">
     <h1>Posts publicados</h1>
-    <ul>
-      <li v-for="post in posts" :key="post.id">
-        {{ post.title }}
-      </li>
-    </ul>
+    <Posts/>
   </div>
 </template>
 
 <script>
-import postService from '../services/postService.js';
+import Posts from '../components/Posts.vue';
 export default {
-    name: 'Posts',
-    created() {
-      postService.get()
-        .then(posts => this.posts = posts.data);
-    },
-    data() {
-      return {
-        posts: []
-      }
+    name: 'PostsView',
+    components: {
+      Posts
     }
 }
 </script>

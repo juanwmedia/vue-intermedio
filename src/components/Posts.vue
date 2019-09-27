@@ -1,31 +1,31 @@
 <template>
   <div>
-    <h1>Tareas</h1>
+    <h1>Posts</h1>
     <input type="text" placeholder="Añadir item" v-model="nuevoItem" />
     <input type="button" value="Agregar item" @click="agregarItem" />
     <br />
     <input type="search" placeholder="Filtrar por título de items" v-model="filtroItems" />
-    <Tarea
-      v-for="(item, $index) in itemsFiltrados"
-      :key="item.id"
-      :titulo="item.title"
-      @eliminarItem="eliminarItem($index)"
-    ></Tarea>
+    <ul>
+        <li
+            v-for="(item, $index) in itemsFiltrados"
+            :key="item.id"
+            @eliminarItem="eliminarItem($index)">
+            {{ item.title }}
+        </li>
+    </ul>
+
   </div>
 </template>
 
 <script>
-import todoService from "../services/todoService.js";
-import Tarea from "@/components/Tarea";
+import postService from "../services/postService.js";
 import {crudItemsMixin} from "../mixins/crudItems.js";
 export default {
-  name: "Tareas",
+  name: "PostsList",
   mixins: [crudItemsMixin],
   created() {
-    todoService.get().then(items => (this.items = items.data));
+    postService.get().then(items => (this.items = items.data));
   },
-  components: {
-    Tarea
-  }
+
 };
 </script>
