@@ -9,6 +9,7 @@
         <li
             v-for="(item, $index) in itemsFiltrados"
             :key="item.id"
+            @click="verPost(item.id)"
             @eliminarItem="eliminarItem($index)">
             {{ item.title }}
         </li>
@@ -26,6 +27,19 @@ export default {
   created() {
     postService.get().then(items => (this.items = items.data));
   },
+  methods: {
+    verPost(postId) {
+      this.$router.push({
+        name: 'post', params: {id: postId}
+      })
+    }
+  }
 
 };
 </script>
+
+<style scoped>
+li {
+  cursor: pointer;
+}
+</style>

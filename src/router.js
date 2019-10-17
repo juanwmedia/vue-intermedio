@@ -1,23 +1,44 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
+import Posts from './views/Posts.vue';
+import Post from './components/Post.vue';
+Vue.use(Router);
 
-Vue.use(Router)
+const router = new Router({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            component: Home
+        },
+        {
+            path: '/posts',
+            name: 'posts',
+            component: Posts
+        },
+        {
+            path: '/posts/:id',
+            name: 'post',
+            component: Post,
+            meta: {
+                auth: true,
+            }
+        },
+        {
+            path: '*',
+            redirect: '/'
+        }
+    ]
+});
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/posts',
-      name: 'posts',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Posts.vue')
-    }
-  ]
-})
+const authUser = true;
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.auth && !authUser)
+        next('/');
+    else 
+        next();
+});
+
+export default router;

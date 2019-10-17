@@ -2,8 +2,8 @@
   <div>
     <Logo />
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/posts">Posts</router-link>
+      <RouterLink to="/">Home</RouterLink> |
+      <RouterLink :to="{name: 'posts'}">Posts</RouterLink>
     </div>
   </div>
 </template>
